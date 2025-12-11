@@ -1,0 +1,72 @@
+#include <stdio.h>
+
+// Define a structure
+struct Student {
+    int id;           // 4 bytes
+    char grade;       // 1 byte
+    float marks;      // 4 bytes
+};
+
+// Define a union
+union Data {
+    int i;            // 4 bytes
+    char c;           // 1 byte
+    float f;          // 4 bytes
+};
+
+// Structure with different data types
+struct Example {
+    char a;           // 1 byte
+    int b;            // 4 bytes
+    char c;           // 1 byte
+    double d;         // 8 bytes
+};
+
+// Union with different data types
+union Mixed {
+    char a;           // 1 byte
+    int b;            // 4 bytes
+    double c;         // 8 bytes
+};
+
+int main() {
+    printf("=== SIZE OF STRUCTURES ===\n\n");
+    
+    printf("struct Student:\n");
+    printf("  Size: %lu bytes\n", sizeof(struct Student));
+    printf("  Members: int(%lu) + char(%lu) + float(%lu)\n\n", 
+           sizeof(int), sizeof(char), sizeof(float));
+    
+    printf("struct Example:\n");
+    printf("  Size: %lu bytes\n", sizeof(struct Example));
+    printf("  Members: char(%lu) + int(%lu) + char(%lu) + double(%lu)\n",
+           sizeof(char), sizeof(int), sizeof(char), sizeof(double));
+    printf("  Note: Size may be larger due to padding/alignment\n\n");
+    
+    printf("=== SIZE OF UNIONS ===\n\n");
+    
+    printf("union Data:\n");
+    printf("  Size: %lu bytes\n", sizeof(union Data));
+    printf("  Members: int(%lu), char(%lu), float(%lu)\n",
+           sizeof(int), sizeof(char), sizeof(float));
+    printf("  Note: Union size = size of largest member\n\n");
+    
+    printf("union Mixed:\n");
+    printf("  Size: %lu bytes\n", sizeof(union Mixed));
+    printf("  Members: char(%lu), int(%lu), double(%lu)\n",
+           sizeof(char), sizeof(int), sizeof(double));
+    printf("  Note: Union size = size of largest member (double)\n\n");
+    
+    printf("=== KEY DIFFERENCES ===\n\n");
+    printf("STRUCTURE:\n");
+    printf("  - Stores ALL members simultaneously\n");
+    printf("  - Size = Sum of all members + padding\n");
+    printf("  - Each member has its own memory location\n\n");
+    
+    printf("UNION:\n");
+    printf("  - Stores ONLY ONE member at a time\n");
+    printf("  - Size = Size of largest member\n");
+    printf("  - All members share the same memory location\n");
+    
+    return 0;
+}
